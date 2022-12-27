@@ -1,0 +1,129 @@
+﻿@model IEnumerable<uts.plus.utsplu>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+
+<link href="~/Content/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    @Html.Partial("_navbar")
+    <div>
+        @*@Html.ActionLink("Add New", "Registration", "Home")*@
+        <a href="@Url.Action("createnew",
+               "Account", new {})">create new</a>
+    </div>
+        <table class="table table-bordered table-hover table-striped" id="dtable">
+            <thead>
+                <tr>
+
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmailId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pincode)
+                    </th>
+                    <th class="smsize">
+                        Documents <br /> Verified
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeType)
+                    </th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmailId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pincode)
+                        </td>
+                        <td>
+                            @if (item.DocumentsVerified == true)
+                            {
+                                <p>Yes</p>
+                            }
+                            else
+                            {
+                                <p>No</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeType)
+                        </td>
+                        <td>
+
+                            <a href="@Url.Action("edit","Account", new {item.Id,item.FirstName, item.LastName,item.PhoneNumber,item.EmailId,item.Address, item.Pincode,item.Gender,item.DocumentsVerified, item.EmployeeType})">Edit</a> |
+                            <a href="@Url.Action("Delete", new {item.Id})">Delete</a>
+                        </td>
+
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button type="button" class=" btn btn-primary text-center"
+                    onclick="location.href='@Url.Action("Logout", "Home")'">
+                Logout
+            </button>
+        }
+
+        @Html.Partial("_footer")
+        <script src="~/Scripts/js/jquery.dataTables.js"></script>
+        <script src="~/Scripts/js/dataTables.bootstrap.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#dtable').DataTable();
+            });
+
+
+        </script>
+</body>
+</html>
+
+
+

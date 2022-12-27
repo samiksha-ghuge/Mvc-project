@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>loginsuccessp</title>
+
+</head>
+<body>
+    <div>
+        @Html.Partial("_navbar")
+        <div class="container-fluid">
+            <div class="row">
+                <div class="row">
+                    <a href="@Url.Action("Index","Account")">Registered Users</a>
+                </div>
+                <div class="col-4 mt-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Welcome!</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"> @HttpContext.Current.User.Identity.Name</h6>
+                            <p class="card-text">Take a look at our application!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+    </div>
+</div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @*@Html.ActionLink("Logout", "Logout", "Home")*@
+        <button type="button" class=" btn btn-primary text-center mt-5"
+                onclick="location.href='@Url.Action("Logout", "Home")'">
+            Logout
+        </button>
+    }
+
+
+    @Html.Partial("_footer")
+
+</body>
+</html>

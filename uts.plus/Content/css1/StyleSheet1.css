@@ -1,0 +1,14 @@
+﻿.bg-clr {
+    background-color: darkblue;
+}
+
+.clr-orange {
+    color: orange;
+}
+
+.centerItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+
